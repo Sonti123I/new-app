@@ -1,0 +1,1 @@
+import{j as e}from"./main-B1ytRjOs.js";function n(){return e.jsx(e.Fragment,{children:e.jsx("p",{children:"This is settings page"})})}function r(){return e.jsx("div",{className:"min-h-screen flex flex-col bg-gray-50",children:e.jsx("main",{className:"flex-grow p-6",children:e.jsx(n,{})})})}export{r as component};
