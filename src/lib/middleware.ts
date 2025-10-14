@@ -10,13 +10,9 @@ export const getCookies = createServerFn({ method: "GET" }).handler(async (ctx) 
   return { cookies, token: cookies["token"] || null };
 });
 
-function handleAuthentication(cookiesData: any) {
-  return !!cookiesData?.token;
-}
-
 export async function authMiddleware(ctx: any) {
   const cookiesData = await getCookies();
-  const isAuthenticated = handleAuthentication(cookiesData);
+  const isAuthenticated = !!cookiesData?.token;
   const currentPath = ctx.location?.pathname || "/";
 
   const unprotectedRoutes = ["/login", "/signup"];
