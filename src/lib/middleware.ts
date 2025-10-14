@@ -15,7 +15,7 @@ export async function authMiddleware(ctx: any) {
   const isAuthenticated = !!cookiesData?.token;
   const currentPath = ctx.location?.pathname || "/";
 
-  const unprotectedRoutes = ["/login", "/signup"];
+  const unprotectedRoutes = ["/login", "/signup", "/"];
   const protectedRoutes = ["/dashboard", "/profile"];
 
 
@@ -23,16 +23,14 @@ export async function authMiddleware(ctx: any) {
     throw redirect({ to: "/dashboard" });
   }
 
-
-  if (!isAuthenticated && protectedRoutes.includes(currentPath) && currentPath !== "/login") {
+  
+  if (!isAuthenticated && protectedRoutes.includes(currentPath)) {
     throw redirect({ to: "/" });
   }
 
-  if (currentPath === "/") {
-    if (isAuthenticated) throw redirect({ to: "/dashboard" });
-    else throw redirect({ to: "/" });
+  if (currentPath === "/" && isAuthenticated) {
+    throw redirect({ to: "/dashboard" });
   }
 
   return null;
 }
-
